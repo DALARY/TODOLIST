@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+<main>
+    <div>
+        {% for post in posts %}
+            <h1>{{post.id}} - {{post.title}}</h1>
+            <p>{{post.body}}</p>
+            {% for tag in post.tags %}
+                <span>{{tag}}</span>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</main>
+
+{# {{ dump(posts) }} #}
+{% endblock %}
