@@ -5,20 +5,17 @@ namespace App\Form;
 use App\Entity\Todo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TodoType extends AbstractType
+class TodoFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description', TextareaType::class)
-            ->add('done', CheckboxType::class, [
-                'label' => 'Fait',
-                'value' => false,
+            ->add('stillTodo', CheckboxType::class, [
+                'label' => "Afficher uniquement les tâches qui restent à faire",
+                'mapped' => false,
                 'required' => false,
             ])
         ;

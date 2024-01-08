@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Filtre Todo{% endblock %}
+
+{% block body %}
+    <h1>Filtre Todo</h1>
+    {% for dones in done %}
+        <li>{{dones.name}} {{dones.description}}, {{dones.done}}</li>
+    {% endfor %}
+    
+{% endblock %}
+

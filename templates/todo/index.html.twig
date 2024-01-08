@@ -4,6 +4,11 @@
 
 {% block body %}
     <h1>Todo index</h1>
+    <a href="{{ path('app_todo_done')}}">Afficher les tâches à faire</a>
+    {{ form_start(filterForm) }}
+        {{ form_widget(filterForm) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(filterForm) }}
 
     <table class="table">
         <thead>

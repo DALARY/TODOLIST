@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Todo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,10 +40,14 @@ class TodoRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllOrdered($orderBy, $order): array
+    public function findAllOrdered($orderBy, $order, $criteria): array
     {
-        $query = $this->createQueryBuilder('t')->orderBy('t.'.$orderBy, $order)->getQuery()->getResult();
-        return $query;
+        $query = $this->createQueryBuilder('t')->orderBy('t.'.$orderBy, $order);
+        
+        if($criteria) {
+            $query->andWhere('t.done = :isDone')->setParameter('isDone', $criteria['done']);
+        }
+        return $query->getQuery()->getResult();
     }
 
 //    /**
