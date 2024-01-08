@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Priority;
 use App\Entity\Todo;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,6 +22,10 @@ class TodoType extends AbstractType
                 'label' => 'Fait',
                 'value' => false,
                 'required' => false,
+            ])
+            ->add('priority', EntityType::class, [
+                'class' => Priority::class,
+                'choice_label' => 'level',
             ])
         ;
     }

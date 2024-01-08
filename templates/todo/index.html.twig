@@ -6,6 +6,7 @@
     <h1>Todo index</h1>
     <a href="{{ path('app_todo_done')}}">Afficher les tâches à faire</a>
     {{ form_start(filterForm) }}
+        {{ form_row(filterForm.search) }}
         {{ form_widget(filterForm) }}
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(filterForm) }}
@@ -13,9 +14,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th><a href='/todo?orderby=id&order={{order}}'>Id</a></th>
-                <th><a href='/todo?orderby=name&order={{order}}'>Name</a></th>
+                <th><a href='/todo?orderby=id&order={{order}}&stillTodo={{stillTodo}}&search={{search}}'>Id</a></th>
+                <th><a href='/todo?orderby=name&order={{order}}&stillTodo={{stillTodo}}&search={{search}}'>Name</a></th>
                 <th>Description</th>
+                <th>Level</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +26,9 @@
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.name }}</td>
                 <td>{{ todo.description }}</td>
+                {% if todo.priority is not null %}
+                    <td>{{ todo.priority.level }}</td>
+                {% endif %}
                 <td>
                     <a href="{{ path('app_todo_show', {'id': todo.id}) }}">show</a>
                     <a href="{{ path('app_todo_edit', {'id': todo.id}) }}">edit</a>

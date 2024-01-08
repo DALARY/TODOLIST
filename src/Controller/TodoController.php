@@ -29,6 +29,8 @@ class TodoController extends AbstractController
         $stillTodo = $filterForm->get('stillTodo')->getData() ?? $request->query->get('stillTodo');
         $criteria = (true === $stillTodo) ? ['done' => false] : [];
 
+        $search = $filterForm->get('search')->getData();
+
         $orderby = $request->query->get('orderby') ?? 'id';
         $order = $request->query->get('order') ?? 'ASC';
         if ($order == 'ASC') {
@@ -39,10 +41,11 @@ class TodoController extends AbstractController
         }
         
         return $this->render('todo/index.html.twig', [
-            'todos' => $todoRepository->findAllOrdered($orderby, $order, $criteria),
+            'todos' => $todoRepository->findAllOrdered($orderby, $order, $criteria, $search),
             'order' => $orderAD,
             'filterForm' => $filterForm->createView(),
             'stillTodo' => $stillTodo,
+            'search' => $search,
         ]);
     }
 

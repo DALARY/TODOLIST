@@ -19,6 +19,12 @@
                 <th>Description</th>
                 <td>{{ todo.description }}</td>
             </tr>
+            {% if todo.priority is not null %}
+            <tr>
+                <th>Level</th>
+                <td>{{ todo.priority.level }}</td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>
 

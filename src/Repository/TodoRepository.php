@@ -40,10 +40,14 @@ class TodoRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllOrdered($orderBy, $order, $criteria): array
+    public function findAllOrdered($orderBy, $order, $criteria, $search): array
     {
         $query = $this->createQueryBuilder('t')->orderBy('t.'.$orderBy, $order);
         
+        if($search) {
+            $query->where('t.name LIKE :val')->setParameter('val', '%'.$search.'%');
+        }
+
         if($criteria) {
             $query->andWhere('t.done = :isDone')->setParameter('isDone', $criteria['done']);
         }
