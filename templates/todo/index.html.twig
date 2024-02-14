@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Todo index</h1>
-    <a href="{{ path('app_todo_done')}}">Afficher les tâches à faire</a>
     {{ form_start(filterForm) }}
         {{ form_row(filterForm.search) }}
         {{ form_widget(filterForm) }}
@@ -16,6 +15,7 @@
             <tr>
                 <th><a href='/todo?orderby=id&order={{order}}&stillTodo={{stillTodo}}&search={{search}}'>Id</a></th>
                 <th><a href='/todo?orderby=name&order={{order}}&stillTodo={{stillTodo}}&search={{search}}'>Name</a></th>
+                <th>Fait</th>
                 <th>Description</th>
                 <th>Level</th>
             </tr>
@@ -25,6 +25,11 @@
             <tr>
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.name }}</td>
+                {% if todo.done == 1 %}
+                    <td>Oui</td>
+                {% else %}
+                    <td>Non</td>
+                {% endif %}
                 <td>{{ todo.description }}</td>
                 {% if todo.priority is not null %}
                     <td>{{ todo.priority.level }}</td>

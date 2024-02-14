@@ -112,18 +112,4 @@ class TodoController extends AbstractController
 
         return $this->redirectToRoute('app_todo_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    // Filtrer si la tâche à était faite ou non mais l'affiche dans une page annexe
-
-    /**
-     * @Route("/filtre/done", name="app_todo_done")
-     */
-    public function done(ManagerRegistry $doctrine): Response
-    {
-        $done = $doctrine->getRepository(Todo::class)->findBy(array('done' => 0));
-
-        return $this->render('todo/done.html.twig', [
-            'done' => $done,
-        ]);
-    }
 }
