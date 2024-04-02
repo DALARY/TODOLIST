@@ -9,6 +9,8 @@
         {{ form_widget(filterForm) }}
         <button class="btn">{{ button_label|default('Save') }}</button>
     {{ form_end(filterForm) }}
+    <input type="search" placeholder="Rechercher..." id="search">
+    <span>Filtrer</span><input type="checkbox" id="checkbox_filter">
 
     <table class="table">
         <thead>
@@ -22,15 +24,15 @@
         </thead>
         <tbody>
         {% for todo in todos %}
-            <tr>
+            <tr id="{{todo.id}}">
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.name }}</td>
                 {% if todo.done == 1 %}
-                    <td>Oui</td>
+                    <td class="done">Oui</td>
                 {% else %}
-                    <td>Non</td>
+                    <td class="done">Non</td>
                 {% endif %}
-                <td>{{ todo.description }}</td>
+                    <td>{{ todo.description }}</td>
                 {% if todo.priority is not null %}
                     <td>{{ todo.priority.level }}</td>
                 {% endif %}
