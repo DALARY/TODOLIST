@@ -65,7 +65,7 @@ search.addEventListener("input", () => {
       const newTr = document.createElement("tr");
       const newTd = document.createElement("td");
 
-      newTd.textContent = data.name;
+      newTd.textContent = data.name
       newTr.appendChild(newTd);
       tbody.appendChild(newTr);
     });
