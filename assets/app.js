@@ -7,7 +7,7 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.css";
-console.log("poulet");
+
 const check = document.getElementById("checkbox_filter");
 
 const dones = document.querySelectorAll(".done");
@@ -58,13 +58,15 @@ search.addEventListener("input", () => {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
 
       const tbody = document.querySelector("tbody");
       tbody.remove();
-      
+
       const newTr = document.createElement("tr");
+      const newTd = document.createElement("td");
+
+      newTd.textContent = data.name;
+      newTr.appendChild(newTd);
       tbody.appendChild(newTr);
-      newTr.textContent = data;
     });
 });
