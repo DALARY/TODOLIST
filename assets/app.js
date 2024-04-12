@@ -62,11 +62,16 @@ search.addEventListener("input", () => {
       const tbody = document.querySelector("tbody");
       tbody.remove();
 
+      const table = document.querySelector("table");
+      const newTbody = document.createElement("tbody");
       const newTr = document.createElement("tr");
       const newTd = document.createElement("td");
 
-      newTd.textContent = data.name
+      table.appendChild(newTbody)
+      newTbody.appendChild(newTr);
       newTr.appendChild(newTd);
-      tbody.appendChild(newTr);
+      console.log(data.id)
+      newTd.textContent = data.name
+      
     });
 });
