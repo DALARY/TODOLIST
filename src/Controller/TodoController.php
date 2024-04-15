@@ -71,7 +71,21 @@ class TodoController extends AbstractController
         ]);
     }
 
-     /**
+    /**
+     * @Route("/filter", name="app_todo_filter", methods={"POST", "GET"})
+     */
+    public function filter(SerializerInterface $serializer, EntityManagerInterface $em, Request $request): Response
+    {      
+        $terms = ($request->toArray())['terms'];
+
+        $query = $em->createQuery('SELECT t FROM App\Entity\Todo t WHERE t.name LIKE :terms')
+        ->setParameter('terms', '%'.$terms.'%');
+        $search = $query->getResult();
+        $serializerData = $serializer->serialize($search, 'json', ['groups' => 'list_todo']);
+        return new Response($serializerData);
+    }
+
+    /**
      * @Route("/search", name="app_todo_search", methods={"POST", "GET"})
      */
     public function search(SerializerInterface $serializer, EntityManagerInterface $em, Request $request): Response
